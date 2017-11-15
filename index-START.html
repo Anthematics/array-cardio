@@ -32,18 +32,18 @@
 		// Array.prototype.filter()
 		// 1. Filter the list of inventors for those who were born in the 1500's
 
-const invent15 = inventors.filter(function(inventor){
-		if (inventor.year >= 1500 && inventor.year <= 1600){
-			return true
-		}
-});
-console.table(invent15)
+//const invent15 = inventors.filter(function(inventor){
+//		if (inventor.year >= 1500 && inventor.year <= 1600){
+//			return true
+//		}
+//});
+//console.table(invent15)
 
 
 //RESULT REFACTORED AS AN ARROW FUNCTION
 
-//const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year <= 1600))
-//console.table(fifteen)
+const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year <= 1600))
+console.table(fifteen)
 //if you want to return a result as a table not a log you can literally use console.table(result) instead of console.log()
 
 		// Array.prototype.map()
@@ -52,6 +52,7 @@ console.table(invent15)
 	const fullNames = inventors.map(inventor=> inventor.first + ' ' + inventor.last);
 	console.log(fullNames)
 
+//RESULT REFACTORED
 	//another solution looks like inventors.map(inventor => `${inventor.first} ${inventor.last}` ) console.log(fullNames)
 
 		// Array.prototype.sort()
@@ -67,10 +68,31 @@ console.table(invent15)
 
 console.table(yearSort)
 
-		// Array.prototype.reduce()
-		// 4. How many years did all the inventors live?
+//REFACTORED
+ // const ordered = inventors.sort((a,b) => a.year => b.year ? 1: -1);
+ // console.table(ordered)
+
+// Array.prototype.reduce()
+// 4. How many years did all the inventors live?
+
+	const lifeSpan = inventors.reduce((total,inventor) => {
+		return total + (inventor.passed - inventor.year);
+	}, 0);
+
+	console.log(lifeSpan)
 
 		// 5. Sort the inventors by years lived
+
+const oldest = inventors.sort(function(a,b){
+	const lastGuy = a.passed - a.year
+	const nextGuy = b.passed - b.year
+	if (lastGuy > nextGuy) {
+		return -1;
+	} else {
+		return 1;
+	}
+});
+console.table(oldest)
 
 		// 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 		// https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
